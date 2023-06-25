@@ -1,19 +1,7 @@
 steps:
-  # Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/adsystem-388212/adsystemserver', '.']
-  # Push the Docker image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/adsystem-388212/adsystemserver']
-  # Deploy the app to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'adsystemserver'
-      - '--image'
-      - 'gcr.io/adsystem-388212/adsystemserver'
-      - '--platform'
-      - 'managed'
-      - '--region'
-      - 'global'
+    args: ['run', 'deploy', 'adsystemserver', '--image', 'gcr.io/adsystem-388212/adsystemserver', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
