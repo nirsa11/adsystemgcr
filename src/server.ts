@@ -15,11 +15,15 @@ export class Server {
   private app: Express;
   constructor() {
     this.app = express();
+
     this.app.use(cors());
 
     this.app.use(cookieParser());
     this.app.use(express.json());
 
+    this.app.get("/", (req, res) => {
+      res.send("check");
+    });
     this.app.use(
       this.getApiPrefix(),
       new RouterApi().initRouter(),

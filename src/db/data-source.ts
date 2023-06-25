@@ -24,13 +24,13 @@ export const AppDataSource = new DataSource({
   logging: true,
   entities: [getEntities()],
 
-  // Production Mode
-  ...(prod && {
-    database: ENVHelper.getVariable("DB_DATABASE_NAME"),
-    logging: false,
-    synchronize: false,
-    extra: {
-      socketPath: "/cloudsql/adsystem-388212:me-west1:adsystem-sql",
-    },
-  }),
+  // // Production Mode
+  // ...(prod && {
+  //   database: ENVHelper.getVariable("DB_DATABASE_NAME"),
+  //   logging: false,
+  //   synchronize: false,
+  //   extra: {
+  //     socketPath: "/cloudsql/adsystem-388212:me-west1:adsystem-sql",
+  //   },
+  // }),
 });

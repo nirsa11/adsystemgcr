@@ -1,7 +1,3 @@
-import nodemailer from "nodemailer";
-const hbs = require("nodemailer-express-handlebars");
-import { ENVHelper } from "./env.helper";
-import path from "path";
 const sendgrid = require("@sendgrid/mail");
 /**
  * A helper class for sending emails using the SendGrid API.

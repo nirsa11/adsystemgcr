@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:18
+FROM node:14
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -15,6 +15,9 @@ COPY . .
 
 # Build the TypeScript app
 RUN npm run build
+
+EXPOSE 4000
+
 
 # Specify the command to run your app
 CMD [ "npm", "start" ]
