@@ -24,15 +24,15 @@ export class Server {
     this.app.get("/", (req, res) => {
       res.send("check");
     });
-    this.app.use(
-      this.getApiPrefix(),
-      new RouterApi().initRouter(),
-      handleErrors
-    );
+    // this.app.use(
+    //   this.getApiPrefix(),
+    //   new RouterApi().initRouter(),
+    //   handleErrors
+    // );
   }
 
   async initConnection(): Promise<void> {
-    await initDB();
+    // await initDB();
   }
 
   private getApiPrefix(): string {
