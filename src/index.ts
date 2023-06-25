@@ -1,55 +1,23 @@
 import "reflect-metadata";
-import * as functions from "firebase-functions";
-import { RouterApi } from "./routes";
-import { initDB } from "./db/connection.db";
-import cors from "cors";
-import express, { Express, NextFunction, Request, Response } from "express";
-import cookieParser from "cookie-parser";
-import { handleErrors } from "./common/middlewares/errorHandler.middleware";
-import { createConnection, getConnectionOptions, Connection } from "typeorm";
+import { Server } from "./server";
 
 /**
- * Initializes an Express app and sets up middleware for CORS, cookie parsing, and JSON parsing.
- * Also ensures a database connection before handling requests.
- * @param {Express} app - the Express app to use
- * @returns None
+ * Starts the server on the specified port or 4000 if no port is specified.
+ * @returns {Promise<void>} None
  */
-const app: Express = express();
+const startServer = async (): Promise<void> => {
+  const port = parseInt(process.env.PORT) || 4000;
 
-const corsOptions: cors.CorsOptions = {
-  origin: "https://adsytemfrontts-w6s65zwlhq-zf.a.run.app",
-  allowedHeaders: [
-    "Authorization",
-    "withCredentials",
-    "Accept",
-    "Content-Type",
-  ],
-  maxAge: 86400,
+  try {
+    const appInstance: Server = new Server();
+
+    await appInstance.initConnection();
+
+    await appInstance.start(port);
+    console.log(`server running on port ${port}`);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-app.use(cors(corsOptions));
-app.use(cookieParser());
-app.use(express.json());
-
-const ensureDatabaseConnection = (app: Express) => {
-  return async (req: Request, res: Response) => {
-    try {
-      const connection = await initDB();
-      res.locals.connection = connection;
-      app(req, res);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ error: "Failed to establish database connection ." });
-    }
-  };
-};
-
-app.use("/v1", new RouterApi().initRouter(), handleErrors);
-
-/**
- * Exports a Firebase Cloud Function that ensures a database connection before handling an HTTP request.
- * @param {object} app - The Firebase app instance.
- * @returns None
- */
-exports.api = functions.https.onRequest(ensureDatabaseConnection(app));
+startServer();
