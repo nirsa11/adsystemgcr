@@ -9,7 +9,7 @@
       "start:dev": "npx nodemon",
       "serve": "npm run build && firebase emulators:start --only functions",
       "shell": "npm run build && firebase functions:shell",
-      "start": "node build/index.js",
+      "start": "node build/indexDev.js",
       "deploy": "npm run build&&firebase deploy --only functions",
       "logs": "firebase functions:log",
       "dev": "set NODE_ENV=development&& nodemon ./src/index.ts",
