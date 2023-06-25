@@ -4,7 +4,7 @@
    "description": "",
    "main": "build/index.js",
    "scripts": {
-      "build": "tsc --outDir build&& cpy .env.production build",
+      "build": "tsc&& cpy .env.production build",
       "test": "echo \"Error: no test specified\" && exit 1",
       "start:dev": "npx nodemon",
       "serve": "npm run build && firebase emulators:start --only functions",
