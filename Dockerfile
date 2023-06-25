@@ -15,7 +15,7 @@ COPY . .
 # Build the TypeScript app
 RUN npm run build
 
-EXPOSE 4000
+EXPOSE 8080
 
 
 # Specify the command to run your app

@@ -6,7 +6,7 @@ import { Server } from "./server";
  * @returns {Promise<void>} None
  */
 const startServer = async (): Promise<void> => {
-  const port = parseInt(process.env.PORT) || 4000;
+  const port = parseInt(process.env.PORT) || 8080;
 
   try {
     const appInstance: Server = new Server();
